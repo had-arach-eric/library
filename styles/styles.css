@@ -1,0 +1,42 @@
+html {
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 50px;
+}
+
+.add-button {
+  width: 25vw;
+  height: 10vh;
+  border-radius: 15px;
+  align-self: center;
+  margin-top: 10px;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+.table-title {
+
+}
+
+th {
+  border: 3px solid black;
+}
+
+td {
+  border: 1px solid black;
+}
+
