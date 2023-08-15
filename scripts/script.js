@@ -1,9 +1,9 @@
 //Node references
-const books = {};
 const dialog = document.querySelector("#dialog");
 const containerUI = document.querySelector(".container");
 const addButtonUI = document.querySelector(".add-button");
 const cardsUI = document.querySelector(".cards");
+
 const titleInput = document.querySelector(".title");
 const authorInput = document.querySelector(".author");
 const numberOfPagesInput = document.querySelector(".number-of-pages");
@@ -12,6 +12,7 @@ const confirmButton = document.querySelector(".confirm");
 const cancelButton = document.querySelector(".cancel");
 
 //Card IDs
+const books = {};
 let id = { val: "0" };
 
 // ---------------------------------------------------------------------
@@ -66,6 +67,7 @@ function addBookUI(book) {
   removeButtonUI.textContent = "Delete";
   removeButtonUI.setAttribute("type", "button");
   removeButtonUI.setAttribute("id", cardUI.getAttribute("id"));
+  removeButtonUI.classList.add("card-button");
   cardUI.appendChild(removeButtonUI);
   removeButtonUI.addEventListener("click", () => {
     removeBook(books, cardsUI, removeButtonUI.id);
@@ -127,6 +129,9 @@ function main() {
     resetForm();
   });
 }
+
+
+
 
 main();
 

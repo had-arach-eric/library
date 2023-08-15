@@ -8,6 +8,7 @@ html {
 
 body {
   margin: 0;
+  background-color: #ccd6d7;
 }
 
 .container {
@@ -22,6 +23,10 @@ body {
   border-radius: 15px;
   align-self: center;
   margin-top: 10px;
+  background-color: #79adef;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
 table {
@@ -52,6 +57,7 @@ th, td {
   border-radius: 15px;
   display: flex;
   flex-direction: column;
+  background-color: #ffdfa5;
 }
 
 .container-read {
@@ -63,5 +69,12 @@ th, td {
   display: flex;
   flex-direction: column;
   row-gap: 20px;
+}
+
+.card-button {
+  align-self: center;
+  padding: 10px 20px;
+  border-radius: 10px;
+  background-color: #fd9191;
 }
 
