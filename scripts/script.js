@@ -1,8 +1,20 @@
-const myLibrary = {};
+//Node references
+const books = {};
+const dialog = document.querySelector("#dialog");
 const containerUI = document.querySelector(".container");
 const addButtonUI = document.querySelector(".add-button");
 const cardsUI = document.querySelector(".cards");
-let id = {val: "0"};
+const titleInput = document.querySelector(".title");
+const authorInput = document.querySelector(".author");
+const numberOfPagesInput = document.querySelector(".number-of-pages");
+const readInput = document.querySelector(".read");
+const confirmButton = document.querySelector(".confirm");
+const cancelButton = document.querySelector(".cancel");
+
+//Card IDs
+let id = { val: "0" };
+
+// ---------------------------------------------------------------------
 
 function Book(title, author, numberOfPages, read, id) {
   this.title = title;
@@ -13,19 +25,19 @@ function Book(title, author, numberOfPages, read, id) {
   id.val = (+(id.val) + 1).toString();
 }
 
-function addBookToLibrary(book) {
-  myLibrary[book.id] = book;
+function addBook(book) {
+  books[book.id] = book;
 }
 
-function addBookToPage(book) {
+function addBookUI(book) {
   
   const cardUI = document.createElement("div");
   cardUI.classList.add("card");
+  cardUI.setAttribute("id", book.id);
   cardsUI.appendChild(cardUI);
   
   const titleUI = document.createElement("h2");
   titleUI.textContent = `Title: ${book.title}`;
-  cardUI.setAttribute("id", book.id);
   cardUI.appendChild(titleUI);
 
   const authorUI = document.createElement("p");
@@ -37,52 +49,88 @@ function addBookToPage(book) {
   cardUI.appendChild(numberOfPagesUI);
 
   const readUI = document.createElement("p");
+  readUI.classList.add("container-read");
   const labelReadUI = document.createElement("label");
   labelReadUI.textContent = "Read";
   const inputReadUI = document.createElement("input");
   inputReadUI.setAttribute("type", "checkbox");
   inputReadUI.checked = (book.read) ? true : false;
+  readUI.addEventListener("click", () => {
+    books[cardUI.id].read = !(books[cardUI.id].read);
+  });
   readUI.appendChild(labelReadUI); 
   readUI.appendChild(inputReadUI);
   cardUI.appendChild(readUI);
-  readUI.style.display = "flex";
-  readUI.style.columnGap = "10px";
 
   const removeButtonUI = document.createElement("button");
   removeButtonUI.textContent = "Delete";
   removeButtonUI.setAttribute("type", "button");
-  removeButtonUI.setAttribute("id", id.val);
+  removeButtonUI.setAttribute("id", cardUI.getAttribute("id"));
   cardUI.appendChild(removeButtonUI);
+  removeButtonUI.addEventListener("click", () => {
+    remove(books, cardsUI, removeButtonUI.id);
+  });
 }
 
-function addBook(book) {
-  addBookToLibrary(book);
-  addBookToPage(book);
+function add(book) {
+  addBook(book);
+  addBookUI(book);
 }
 
-function removeBook(book, id) {
-  for (let key in book) {
-    if (key === identifier) {
-      delete book[key];
+function removeBook(books, id) {
+  for (let key in books) {
+    if (key === id) {
+      delete books[key];
     }
   }
-  /*for (let i = 0; i < cardsUI.length; i++) {
-    if (cardsUI.children[i] === )
-  }*/
 }
 
+function removeBookUI(cardsUI, id) {
+  for (let i = 0; i < cardsUI.children.length; i++) {
+    if (cardsUI.children[i].getAttribute("id") === id) {
+      cardsUI.children[i].remove();
+    }
+  }
+}
+
+function remove(books, cardsUI, id) {
+  removeBook(books, id);
+  removeBookUI(cardsUI, id);
+}
+
+function handleAddButton() {
+  dialog.showModal();
+}
+
+function handleConfirmButton(e) {
+  e.preventDefault();
+  add(new Book(titleInput.value, authorInput.value, numberOfPagesInput.value, readInput.value, id));
+  dialog.close();
+}
+
+function main() {
+  addButtonUI.addEventListener("click", handleAddButton);
+  confirmButton.addEventListener("click", handleConfirmButton);
+  cancelButton.addEventListener("click", () => {
+    dialog.close();
+  });
+}
+
+main();
 
 
-const libro1 = new Book("Harry Potter", "JK", 500, false, id);
-const libro2 = new Book("Batman", "Nolan", "250", true, id);
-//console.log(libro1);
-//console.log(libro2);
 
-addBook(libro1);
-addBook(libro2);
 
-console.log(myLibrary);
-console.log(cardsUI);
+
+
+
+
+
+
+
+
+
+
 
 
 

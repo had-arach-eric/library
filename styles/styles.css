@@ -54,3 +54,14 @@ th, td {
   flex-direction: column;
 }
 
+.container-read {
+  display: flex;
+  column-gap: 10px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
