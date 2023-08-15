@@ -6,27 +6,33 @@
   <title>Library</title>
   <link rel="stylesheet" href="./styles/normalize.css">
   <link rel="stylesheet" href="./styles/styles.css">
+  <script src="./scripts/script.js" defer></script>
 </head>
 <body>
   <div class="container">
     <button id="add-button" class="add-button">Add book</button>
-  <table>
-    <caption class="table-title">
-      <h1>Books</h1>
-    </caption>
-    <thead>
-      <tr>
-        <th>Title</th>
-        <th>Author</th>
-        <th>Number of pages</th>
-        <th>Was read?</th>
-      </tr>
-    </thead>
-    <tbody>
-
-    </tbody>
-  </table>
+    <dialog id="dialog">
+      <form method="dialog">
+        <label>
+          <input type="text" placeholder="Title">
+        </label>
+        <label>
+          <input type="text" placeholder="Author">
+        </label>  
+        <label>
+          <input type="text" placeholder="Number of pages">
+        </label>  
+        <label> Was read?
+          <input type="checkbox">
+        </label>  
+      </form>
+    </dialog>
+    <div class="cards">
+      
+    </div>
+    
   </div>
+
   
 </body>
 </html>

@@ -28,15 +28,29 @@ table {
   border-collapse: collapse;
 }
 
-.table-title {
-
-}
-
-th {
-  border: 3px solid black;
-}
-
-td {
+.thead th {
   border: 1px solid black;
+  background-color: rgb(225 206 166);
+}
+
+th, td {
+  border: 1px solid black;
+  background-color: #80a551;
+}
+
+.cards {
+  padding-left: 30px;
+  padding-right: 30px;
+  display: grid;
+  gap: 25px 25px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.card {
+  padding: 20px;
+  border: 2px solid black;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
 }
 
