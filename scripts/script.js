@@ -16,16 +16,16 @@ let id = { val: "0" };
 
 // ---------------------------------------------------------------------
 
-function Book(title, author, numberOfPages, read, id) {
+function Book(title, author, numberOfPages, read, idObj) {
   this.title = title;
   this.author = author;
   this.numberOfPages = numberOfPages;
   this.read = read;
-  this.id = id.val;
-  id.val = (+(id.val) + 1).toString();
+  this.id = idObj.val;
+  idObj.val = (+(idObj.val) + 1).toString();
 }
 
-function addBook(book) {
+function addBookToBooks(book) {
   books[book.id] = book;
 }
 
@@ -68,16 +68,16 @@ function addBookUI(book) {
   removeButtonUI.setAttribute("id", cardUI.getAttribute("id"));
   cardUI.appendChild(removeButtonUI);
   removeButtonUI.addEventListener("click", () => {
-    remove(books, cardsUI, removeButtonUI.id);
+    removeBook(books, cardsUI, removeButtonUI.id);
   });
 }
 
-function add(book) {
-  addBook(book);
+function addBook(book) {
+  addBookToBooks(book);
   addBookUI(book);
 }
 
-function removeBook(books, id) {
+function removeBookFromBooks(books, id) {
   for (let key in books) {
     if (key === id) {
       delete books[key];
@@ -93,8 +93,8 @@ function removeBookUI(cardsUI, id) {
   }
 }
 
-function remove(books, cardsUI, id) {
-  removeBook(books, id);
+function removeBook(books, cardsUI, id) {
+  removeBookFromBooks(books, id);
   removeBookUI(cardsUI, id);
 }
 
@@ -102,17 +102,29 @@ function handleAddButton() {
   dialog.showModal();
 }
 
+function resetForm() {
+  titleInput.value = "";
+  authorInput.value = "";
+  numberOfPagesInput.value = "";
+  readInput.checked = false;
+}
+
 function handleConfirmButton(e) {
   e.preventDefault();
-  add(new Book(titleInput.value, authorInput.value, numberOfPagesInput.value, readInput.value, id));
+  addBook(new Book(titleInput.value, authorInput.value, numberOfPagesInput.value, readInput.checked, id));
+  dialog.close();
+}
+
+function handleCancelButton() {
   dialog.close();
 }
 
 function main() {
   addButtonUI.addEventListener("click", handleAddButton);
   confirmButton.addEventListener("click", handleConfirmButton);
-  cancelButton.addEventListener("click", () => {
-    dialog.close();
+  cancelButton.addEventListener("click", handleCancelButton);
+  dialog.addEventListener("close", () => {
+    resetForm();
   });
 }
 
