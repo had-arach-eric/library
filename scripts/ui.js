@@ -18,25 +18,36 @@ export class UI {
     this.books = books;
   };
 
-  addBookUI = book => {
-  
+  createCardUI = book => {
     const cardUI = document.createElement("div");
     cardUI.classList.add("card");
     cardUI.setAttribute("id", book.id);
     this.cardsUI.appendChild(cardUI);
-    
+    return cardUI;
+  }
+
+  createTitleUI = (book, cardUI) => {
     const titleUI = document.createElement("h2");
     titleUI.textContent = `Title: ${book.title}`;
     cardUI.appendChild(titleUI);
-  
+    return titleUI;
+  }
+
+  createAuthorUI = (book, cardUI) => {
     const authorUI = document.createElement("p");
     authorUI.textContent = `Author: ${book.author}`;
     cardUI.appendChild(authorUI);
-  
+    return authorUI;
+  }
+
+  createNumberOfPagesUI = (book, cardUI) => {
     const numberOfPagesUI = document.createElement("p");
     numberOfPagesUI.textContent = `Number of pages: ${book.numberOfPages}`;
     cardUI.appendChild(numberOfPagesUI);
-  
+    return numberOfPagesUI;
+  }
+
+  createReadUI = (book, cardUI) => {
     const readUI = document.createElement("p");
     readUI.classList.add("container-read");
     const labelReadUI = document.createElement("label");
@@ -50,7 +61,10 @@ export class UI {
     readUI.appendChild(labelReadUI); 
     readUI.appendChild(inputReadUI);
     cardUI.appendChild(readUI);
-  
+    return readUI;
+  }
+
+  createRemoveButtonUI = (book, cardUI) => {
     const removeButtonUI = document.createElement("button");
     removeButtonUI.textContent = "Delete";
     removeButtonUI.setAttribute("type", "button");
@@ -60,6 +74,16 @@ export class UI {
     removeButtonUI.addEventListener("click", () => {
       this.removeBook(book.id);
     });
+    return removeButtonUI;
+  }
+
+  addBookUI = book => {
+    const cardUI = this.createCardUI(book);
+    this.createTitleUI(book, cardUI);
+    this.createAuthorUI(book, cardUI);
+    this.createNumberOfPagesUI(book, cardUI);
+    this.createReadUI(book, cardUI);
+    this.createRemoveButtonUI(book, cardUI);
   }
 
   removeBookUI = id => {
