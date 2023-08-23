@@ -76,8 +76,6 @@ export class UI {
   }
 
   removeBook = id => {
-    console.log("entro");
-    console.log(this.books.removeBookFromBooks);
     this.books.removeBookFromBooks(id);
     this.removeBookUI(id);
   }
